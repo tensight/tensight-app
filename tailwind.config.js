@@ -5,6 +5,9 @@ module.exports = {
   },
   purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      'serif': ['Crimson Text', 'serif']
+    },
     extend: {
       colors: {
         'accent-1': '#333',
