@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const links = [
-  { href: 'https://github.com/vercel/next.js', label: 'GitHub' },
+  { href: 'https://github.com/tensight', label: 'GitHub' },
   { href: 'https://nextjs.org/docs', label: 'Login' },
 ]
 
@@ -11,7 +11,7 @@ export default function Nav() {
       <ul className="flex justify-between items-center p-8">
         <li>
           <Link href="/">
-            <a className="text-blue-500 no-underline">Home</a>
+            <a className="text-gray-800 no-underline font-serif text-xl font-bold">Tensight</a>
           </Link>
         </li>
         <ul className="flex justify-between items-center space-x-4">
