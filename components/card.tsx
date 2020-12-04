@@ -6,11 +6,11 @@ export default function Card({ athlete }) {
      <header id="card-header">
         <h2 className="text-lg">{athlete.athlete_id}</h2>
         <img src="https://a.espncdn.com/combiner/i?img=/i/headshots/tennis/players/full/2789.png" height="50"></img>
-        <h2 className="text-lg font-semibold text-black">
-         {athlete.firstname} {athlete.lastname}
+        <h2 className="text-lg font-semibold text-gray-800">
+         {athlete.firstName} {athlete.lastName}
         </h2>
         <dl className="flex flex-wrap">
-          <dt>{athlete.nativename}</dt>
+          <dt className="text-gray-600">{athlete.nativeName}</dt>
           <dt>{athlete.description}</dt>
         </dl>
      </header>
