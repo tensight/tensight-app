@@ -1,0 +1,72 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Athlete {
+  id              Int               @id @default(autoincrement())
+  firstName       String?
+  lastName        String?
+  nativeName      String?
+  description     String?
+  popScore        Int?
+  status          String?
+  AthleteHeritage AthleteHeritage[]
+  FavoriteMoments FavoriteMoments[]
+}
+
+model AthleteHeritage {
+  athleteId Int
+  countryId String
+  Athlete   Athlete @relation(fields: [athleteId], references: [id])
+
+  @@id([athleteId, countryId])
+}
+
+model FavoriteMoments {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  userId      Int?
+  athleteId   Int?
+  description String?
+  url         String?
+  Athlete     Athlete? @relation(fields: [athleteId], references: [id])
+  User        User?    @relation(fields: [userId], references: [id])
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  createdAt DateTime @default(now())
+  content   String?
+  published Boolean  @default(false)
+  authorId  Int
+  User      User     @relation(fields: [authorId], references: [id])
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  userId Int     @unique
+  User   User    @relation(fields: [userId], references: [id])
+}
+
+model Sport {
+  id      Int      @id @default(autoincrement())
+  sport   String
+  gender  String?
+  olympic Boolean?
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  name            String?
+  email           String            @unique
+  FavoriteMoments FavoriteMoments[]
+  Post            Post[]
+  Profile         Profile?
+}
