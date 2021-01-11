@@ -16,3 +16,14 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
+.tooltip .tooltip-text {
+  visibility: hidden;
+  text-align: center;
+  padding: 2px 6px;
+  position: absolute;
+  z-index: 100;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
