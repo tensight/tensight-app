@@ -1,30 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model Athlete {
   id              Int               @id @default(autoincrement())
+  espnId          Int?
+  olympediaId     Int?
   firstName       String?
   lastName        String?
   nativeName      String?
+  sport           String?
   description     String?
   popScore        Int?
   status          String?
-  AthleteHeritage AthleteHeritage[]
+  heritage        String[]
+  Sport           Sport?            @relation(fields: [sport], references: [id])
   FavoriteMoments FavoriteMoments[]
-}
-
-model AthleteHeritage {
-  athleteId Int
-  countryId String
-  Athlete   Athlete @relation(fields: [athleteId], references: [id])
-
-  @@id([athleteId, countryId])
 }
 
 model FavoriteMoments {
@@ -56,10 +52,11 @@ model Profile {
 }
 
 model Sport {
-  id      Int      @id @default(autoincrement())
+  id      String    @id
   sport   String
   gender  String?
   olympic Boolean?
+  Athlete Athlete[]
 }
 
 model User {

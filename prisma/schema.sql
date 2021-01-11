@@ -21,21 +21,6 @@ CREATE TABLE IF NOT EXISTS "public"."Profile" (
   FOREIGN KEY ("userId") REFERENCES "public"."User"(id)
 );
 
-CREATE TABLE IF NOT EXISTS "public"."Athlete" (
-  id SERIAL PRIMARY KEY NOT NULL,
-  "firstName" VARCHAR(255),
-  "lastName" VARCHAR(255),
-  "nativeName" VARCHAR(255),
-  description TEXT,
-  "popScore" INTEGER,
-  status VARCHAR(255)
-);
-
-CREATE TABLE IF NOT EXISTS "public"."AthleteMap" (
-  athleteId INTEGER REFERENCES "public"."Athlete" (id),
-  espnId INTEGER,
-  olympediaId INTEGER
-);
 
 CREATE TABLE IF NOT EXISTS "public"."Sport" (
   id VARCHAR(3) PRIMARY KEY NOT NULL,
@@ -44,14 +29,21 @@ CREATE TABLE IF NOT EXISTS "public"."Sport" (
   olympic BOOLEAN
 );
 
--- 3NF
-CREATE TABLE IF NOT EXISTS "public"."AthleteHeritage" (
-  "athleteId" INTEGER NOT NULL,
-  "countryId" VARCHAR(2) NOT NULL,
-  FOREIGN KEY ("athleteId") REFERENCES "public"."Athlete"(id),
-  PRIMARY KEY ("athleteId", "countryId")
+CREATE TABLE IF NOT EXISTS "public"."Athlete" (
+  id SERIAL PRIMARY KEY NOT NULL,
+  "espnId" INTEGER,
+  "olympediaId" INTEGER,
+  "firstName" VARCHAR(255),
+  "lastName" VARCHAR(255),
+  "nativeName" VARCHAR(255),
+  sport VARCHAR(3) REFERENCES "public"."Sport" (id),
+  description TEXT,
+  "popScore" INTEGER,
+  status VARCHAR(255),
+  heritage VARCHAR(2) ARRAY
 );
 
+-- 3NF
 CREATE TABLE IF NOT EXISTS "public"."FavoriteMoments" (
   id SERIAL PRIMARY KEY NOT NULL,
   "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
