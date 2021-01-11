@@ -1,13 +1,17 @@
 import Nav from '../components/nav';
 import Card from '../components/card';
+import Footer from '../components/footer';
 import { useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
-import { getSortedAthletesData } from '../lib/athletes'
+import { getSortedAthletesData } from '../lib/athletes';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      athletes: await getSortedAthletesData()
+      athletes: await getSortedAthletesData(prisma)
     }
   }
 }
@@ -21,12 +25,14 @@ export default function IndexPage({ athletes }) {
         <h1 className="text-5xl font-bold font-serif text-accent-1">
           Tensight
         </h1>
-        <h2 className="text-2xl font-serif"> \ˈten-sīt \</h2>
+        <h2 className="text-2xl font-serif"> \ˈten-sīt \ (noun): a concept that describes sports and it's athletes as a <mark>global affair</mark>. 🌎</h2>
       </div>
-      <h2>I'm looking for a 
-        <span></span>
-      </h2>
-      <section id="card-list" className="flex justify-items-start p-12 gap-2">
+      <div className="px-12">
+        <h2 className="font-serif text-center">I'm looking for a 
+          <span></span>
+        </h2>
+      </div>
+      <section id="card-list" className="flex flex-wrap justify-items-start justify-center p-12 gap-2">
         {athletes.length > 0 ? (
           athletes.map((athlete) => (
             <Card 
@@ -36,6 +42,7 @@ export default function IndexPage({ athletes }) {
           ))
         ) : <p>Loading...</p>}
       </section>
+      <Footer /> 
     </div>
   )
 }
