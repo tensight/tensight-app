@@ -50,7 +50,10 @@ const workaroundLeagues = ['FTB']
 export function getAthleteHeadshot(espnId: number, sportId: string) {
   if (espnId !== null && availableLeagues.some(l => l === sportId)) {
     return `https://a.espncdn.com/combiner/i?img=/i/headshots/${getEspnLeague(sportId)}/players/full/${espnId}.png`
-  } else {
+  } else if (espnId == 149945) {
+    return 'https://www.futwiz.com/assets/img/fifa20/careerfaces/200104.png'
+  } 
+  else {
     return './athlete.png';
   }
 }
