@@ -3,6 +3,7 @@ import Card from '../components/card';
 import Footer from '../components/footer';
 import { useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 import { getSortedAthletesData } from '../lib/athletes';
 import { PrismaClient } from '@prisma/client';
 
@@ -18,7 +19,13 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export default function IndexPage({ athletes }) {
   return (
-    <div className="w-screen h-screen p-5">
+    <div className="w-screen h-screen p-5 def-bg">
+      <style jsx global>{`
+          body {
+            background-color: #e5e5e3;
+          }
+        `}
+      </style>
       <Nav />
       <div className=""></div>
       <div className="py-10 text-center">
