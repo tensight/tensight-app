@@ -1,5 +1,5 @@
 import Nav from '../../components/nav';
-import { getAllAthleteIds, getAthleteData, getEspnLeague } from '../../lib/athletes';
+import { getAllAthleteIds, getAthleteData, getAthleteHeadshot, getEspnLeague } from '../../lib/athletes';
 import { getFlags } from '../../lib/countries';
 import { getSportOfAthlete } from '../../lib/sports';
 import { PrismaClient } from '@prisma/client';
@@ -47,20 +47,39 @@ function getLinks(athleteData) {
 export default function AthletePage({ athleteData, sportOfAthlete }) {
   return (
     <div className="w-screen h-screen p-5">
+      <style jsx global>{`
+          body {
+            background-color: #e5e5e3;
+          }
+        `}
+      </style>
       <Nav />
-      <div className="flex justify-between text-2xl m-8 p-4 border-solid border-4 border-gray-700 border-opacity-50">
-        <div id="athleteVitals">
-          <div className="flex">
-            <h1 className="font-bold">{`${athleteData.firstName} ${athleteData.lastName}`}</h1>
-            <h2 className=""></h2>
-            <h3 className="text-gray-600">&nbsp;{athleteData.nativeName == null ? '' : `(${athleteData.nativeName})`}</h3>
-            <h3 className="text-gray-600">&nbsp;{athleteData.description == null ? '' : ' · ' + athleteData.description}</h3>
-          </div>
-          <div className="flex">
-            Heritage: {getFlags(athleteData.heritage).join(' · ')}
-          </div>
-          <div>
-            <h2 className="">Sport: <mark>{sportOfAthlete.sport}</mark></h2>
+      <div>
+        <div className="text-2xl m-8">
+          <div className="flex flex-row items-center w-6/12 p-4 border-solid border-4 border-gray-700 border-opacity-50">
+            <div className="">
+              <img className="h-48 object-contain" src={getAthleteHeadshot(athleteData.espnId, athleteData.sport)}></img>
+            </div>
+            
+            <div id="athleteVitals flex">
+              <div className="flex">
+                <div>
+                  <h1 className="font-bold">{`${athleteData.firstName} ${athleteData.lastName}`}</h1>
+                </div>
+                <div>
+                  <h3 className="text-gray-600">&nbsp;{athleteData.nativeName == null ? '' : `(${athleteData.nativeName})`}</h3>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-gray-600">{athleteData.description == null ? '' : athleteData.description}</h3>
+              </div>
+              <div className="flex">
+                Heritage: {getFlags(athleteData.heritage).join(' · ')}
+              </div>
+              <div>
+                <h2 className="">Sport: <mark>{sportOfAthlete.sport}</mark></h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>
