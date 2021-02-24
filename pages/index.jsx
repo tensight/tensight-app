@@ -75,6 +75,9 @@ export default function IndexPage() {
       <div>
         {athleteCards}
       </div>
+      <div className="">
+        <h2 className="text-center text-xl font-serif">Favorite athlete missing? <a className="hover:underline" href="https://airtable.com/shrSgvaQ5Aj5892Wx">Submit it to the database!</a></h2>
+      </div>
       <Footer />  
     </div>
   )

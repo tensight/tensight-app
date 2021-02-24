@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const links = [
   { href: 'https://github.com/tensight', label: 'GitHub' },
-  { href: 'https://nextjs.org/docs', label: 'Login' },
+  // { href: 'https://nextjs.org/docs', label: 'Login' },
 ]
 
 export default function Nav() {
