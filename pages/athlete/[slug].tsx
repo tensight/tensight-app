@@ -1,5 +1,5 @@
 import Nav from '../../components/nav';
-import { getAllAthleteIds, getAthleteData, getAthleteHeadshot, getEspnLeague } from '../../lib/athletes';
+import { getAllAthleteSlugs, getAthleteData, getAthleteHeadshot, getEspnLeague } from '../../lib/athletes';
 import { getFlags } from '../../lib/countries';
 import { getSportOfAthlete } from '../../lib/sports';
 import { PrismaClient } from '@prisma/client';
@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function getStaticPaths() {
-  const paths = await getAllAthleteIds(prisma);
+  const paths = await getAllAthleteSlugs(prisma);
   return {
     paths,
     fallback: false
@@ -15,8 +15,9 @@ export async function getStaticPaths() {
 };
 
 export async function getStaticProps({params}) {
-  const athleteData = await getAthleteData(prisma, parseInt(params.id))
-  const sportOfAthlete = await getSportOfAthlete(prisma, parseInt(params.id))
+  console.log(params)
+  const athleteData = await getAthleteData(prisma, params.slug)
+  const sportOfAthlete = await getSportOfAthlete(prisma, params.slug)
   console.log(athleteData);
   return {
     props: {
@@ -61,7 +62,7 @@ export default function AthletePage({ athleteData, sportOfAthlete }) {
               <img className="h-48 object-contain" src={getAthleteHeadshot(athleteData.espnId, athleteData.sport)}></img>
             </div>
             
-            <div id="athleteVitals flex">
+            <div id="athleteVitals">
               <div className="flex">
                 <div>
                   <h1 className="font-bold">{`${athleteData.firstName} ${athleteData.lastName}`}</h1>

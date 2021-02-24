@@ -6,7 +6,7 @@ import { getFlags } from '../lib/countries';
 
 export default function Card({ athlete }) {
   return (
-    <Link href={`/athlete/${encodeURIComponent(athlete.id)}`}>
+    <Link href={`/athlete/${encodeURIComponent(athlete.slug)}`}>
       <a>
         <article id="card" className="bg-white flex relative space-x-4 flex-col w-64 p-5 min-w-64 rounded-l transition duration-500 ease-in-out transform hover:-translate-y-1 hover:shadow-xl">
         <header id="card-header">

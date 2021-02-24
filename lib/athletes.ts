@@ -2,21 +2,21 @@
 
 // const prisma = new PrismaClient();
 
-export async function getAllAthleteIds(prisma) {
+export async function getAllAthleteSlugs(prisma) {
   const athletes = await prisma.athlete.findMany();
   return athletes.map(athlete => {
     return {
       params: {
-        id: athlete.id.toString()
+        slug: athlete.slug
       }
     }
   })
 };
 
-export async function getAthleteData(prisma, athleteId) {
+export async function getAthleteData(prisma, athleteSlug) {
   const athlete = await prisma.athlete.findUnique({
     where: {
-      id: athleteId,
+      slug: athleteSlug,
     }
   });
   return athlete;

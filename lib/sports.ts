@@ -2,10 +2,10 @@
 
 // const prisma = new PrismaClient();
 
-export async function getSportOfAthlete(prisma, athleteId) {
+export async function getSportOfAthlete(prisma, athleteSlug) {
   const sport = await prisma.athlete.findUnique(
     { 
-      where: { id: athleteId },
+      where: { slug: athleteSlug },
       select: {
         Sport: {
           select: {
