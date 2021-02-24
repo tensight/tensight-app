@@ -8,7 +8,7 @@ export default async (req, res) => {
 
     const client = new MeiliSearch({
         host: process.env.MEILISEARCH_HOST,
-        apiKey: process.env.MEILISEARCH_API_KEY,
+        // apiKey: process.env.MEILISEARCH_API_KEY,
     });
 
     if (!client)
