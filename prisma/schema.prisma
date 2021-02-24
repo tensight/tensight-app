@@ -21,6 +21,7 @@ model Athlete {
   heritage        String[]
   Sport           Sport?            @relation(fields: [sport], references: [id])
   FavoriteMoments FavoriteMoments[]
+  slug            String            @unique
 }
 
 model FavoriteMoments {
