@@ -18,6 +18,5 @@ export async function getSportOfAthlete(prisma, athleteSlug) {
       }
     }
   );
-  console.log(sport);
   return sport['Sport'];
 };

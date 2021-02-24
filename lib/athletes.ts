@@ -24,7 +24,6 @@ export async function getAthleteData(prisma, athleteSlug) {
 
 export async function getSortedAthletesData(prisma) {
   const athletes = await prisma.athlete.findMany();
-  console.log(athletes);
   return athletes;
 };
 

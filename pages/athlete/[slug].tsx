@@ -15,10 +15,8 @@ export async function getStaticPaths() {
 };
 
 export async function getStaticProps({params}) {
-  console.log(params)
   const athleteData = await getAthleteData(prisma, params.slug)
   const sportOfAthlete = await getSportOfAthlete(prisma, params.slug)
-  console.log(athleteData);
   return {
     props: {
       athleteData,

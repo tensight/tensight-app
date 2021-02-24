@@ -17,7 +17,6 @@ export default function IndexPage() {
     };
     getAthletes(search)
       .then(data => {
-        console.log(data.hits);
         setAthletes(data.hits);
       });
   }, [search]);
