@@ -10,23 +10,23 @@ datasource db {
 model Athlete {
   id              Int               @id @default(autoincrement())
   espnId          Int?
-  olympediaId     Int?
-  firstName       String?
-  lastName        String?
-  nativeName      String?
-  sport           String?
+  olympediaId     Int?              @default(0)
+  firstName       String?           @db.VarChar(255)
+  lastName        String?           @db.VarChar(255)
+  nativeName      String?           @db.VarChar(255)
+  sport           String            @db.VarChar(3)
   description     String?
   popScore        Int?
-  status          String?
-  heritage        String[]
-  Sport           Sport?            @relation(fields: [sport], references: [id])
+  status          String?           @db.VarChar(255)
+  heritage        String[]          @db.VarChar(2)
+  slug            String            @db.VarChar(255)
+  Sport           Sport             @relation(fields: [sport], references: [id])
   FavoriteMoments FavoriteMoments[]
-  slug            String            @unique
 }
 
 model FavoriteMoments {
   id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
   userId      Int?
   athleteId   Int?
   description String?
@@ -37,8 +37,8 @@ model FavoriteMoments {
 
 model Post {
   id        Int      @id @default(autoincrement())
-  title     String
-  createdAt DateTime @default(now())
+  title     String   @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
   content   String?
   published Boolean  @default(false)
   authorId  Int
@@ -53,17 +53,17 @@ model Profile {
 }
 
 model Sport {
-  id      String    @id
-  sport   String
-  gender  String?
+  id      String    @id @db.VarChar(3)
+  sport   String    @db.VarChar(255)
+  gender  String?   @db.VarChar(255)
   olympic Boolean?
   Athlete Athlete[]
 }
 
 model User {
   id              Int               @id @default(autoincrement())
-  name            String?
-  email           String            @unique
+  name            String?           @db.VarChar(255)
+  email           String            @unique @db.VarChar(255)
   FavoriteMoments FavoriteMoments[]
   Post            Post[]
   Profile         Profile?

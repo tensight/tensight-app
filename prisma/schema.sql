@@ -41,7 +41,6 @@ CREATE TABLE IF NOT EXISTS "public"."Athlete" (
   "popScore" INTEGER,
   status VARCHAR(255),
   heritage VARCHAR(2) ARRAY,
-  "favoriteMoments" INTEGER REFERENCES "public"."FavoriteMoments" (id),
   slug VARCHAR(255) UNIQUE NOT NULL
 );
 
