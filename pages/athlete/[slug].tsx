@@ -2,12 +2,9 @@ import Nav from '../../components/nav';
 import { getAllAthleteSlugs, getAthleteData, getAthleteHeadshot, getEspnLeague } from '../../lib/athletes';
 import { getFlags } from '../../lib/countries';
 import { getSportOfAthlete } from '../../lib/sports';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
 
 export async function getStaticPaths() {
-  const paths = await getAllAthleteSlugs(prisma);
+  const paths = await getAllAthleteSlugs();
   return {
     paths,
     fallback: false
@@ -15,8 +12,8 @@ export async function getStaticPaths() {
 };
 
 export async function getStaticProps({params}) {
-  const athleteData = await getAthleteData(prisma, params.slug)
-  const sportOfAthlete = await getSportOfAthlete(prisma, params.slug)
+  const athleteData = await getAthleteData(params.slug)
+  const sportOfAthlete = await getSportOfAthlete(params.slug)
   return {
     props: {
       athleteData,

@@ -1,6 +1,9 @@
-import Card from '../components/card';
+import Card from '../components/card'
+import { Athlete } from '@prisma/client'
 
-export default function CardList({ athletes }) {
+export type athletesProps = Athlete[]
+
+const CardList: React.FC<{athletes: athletesProps}> = ({ athletes }) => {
   return (
     <section id="card-list" className="flex flex-wrap justify-items-start justify-center p-12 gap-2">
       {athletes.length > 0 ? (
@@ -14,3 +17,5 @@ export default function CardList({ athletes }) {
     </section>
   );
 }
+
+export default CardList

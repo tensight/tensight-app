@@ -1,8 +1,6 @@
-// import { PrismaClient } from '@prisma/client';
+import prisma from '../lib/prisma';
 
-// const prisma = new PrismaClient();
-
-export async function getSportOfAthlete(prisma, athleteSlug) {
+export async function getSportOfAthlete(athleteSlug: string) {
   const sport = await prisma.athlete.findUnique(
     { 
       where: { slug: athleteSlug },

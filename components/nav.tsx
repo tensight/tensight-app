@@ -1,3 +1,4 @@
+import React from 'react'
 import Link from 'next/link'
 
 const links = [
@@ -5,7 +6,7 @@ const links = [
   // { href: 'https://nextjs.org/docs', label: 'Login' },
 ]
 
-export default function Nav() {
+const Nav: React.FC = () => {
   return (
     <nav>
       <ul className="flex justify-between items-center p-8">
@@ -27,3 +28,5 @@ export default function Nav() {
     </nav>
   )
 }
+
+export default Nav

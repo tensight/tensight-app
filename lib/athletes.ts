@@ -1,8 +1,6 @@
-// import { PrismaClient } from '@prisma/client';
+import prisma from '../lib/prisma';
 
-// const prisma = new PrismaClient();
-
-export async function getAllAthleteSlugs(prisma) {
+export async function getAllAthleteSlugs() {
   const athletes = await prisma.athlete.findMany();
   return athletes.map(athlete => {
     return {
@@ -13,7 +11,7 @@ export async function getAllAthleteSlugs(prisma) {
   })
 };
 
-export async function getAthleteData(prisma, athleteSlug) {
+export async function getAthleteData(athleteSlug: string) {
   const athlete = await prisma.athlete.findUnique({
     where: {
       slug: athleteSlug,
@@ -22,12 +20,12 @@ export async function getAthleteData(prisma, athleteSlug) {
   return athlete;
 }
 
-export async function getSortedAthletesData(prisma) {
+export async function getSortedAthletesData() {
   const athletes = await prisma.athlete.findMany();
   return athletes;
 };
 
-export function getEspnLeague(sportId: string) {
+export function getEspnLeague(sportId: string) : string {
   switch (sportId) {
     case 'BAS':
       return 'nba';
@@ -48,7 +46,7 @@ export function getEspnLeague(sportId: string) {
 
 const availableLeagues = ['BAS', 'TEN', 'AFB', 'BSB', 'HOK', 'GOL'];
 const workaroundLeagues = ['FTB'];
-export function getAthleteHeadshot(espnId: number, sportId: string) {
+export function getAthleteHeadshot(espnId: number, sportId: string) : string {
   if (espnId !== null && availableLeagues.some(l => l === sportId)) {
     return `https://a.espncdn.com/combiner/i?img=/i/headshots/${getEspnLeague(sportId)}/players/full/${espnId}.png`
   } else if (espnId == 149945) {

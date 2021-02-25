@@ -1,7 +1,8 @@
 const MeiliSearch = require('meilisearch');
-import { PrismaClient } from '@prisma/client';
+import type { NextApiRequest, NextApiResponse } from 'next'
+import prisma from '../../../lib/prisma';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
     const {
         query: { q }
     } = req;
@@ -18,7 +19,6 @@ export default async (req, res) => {
 
     if (req.method === 'POST') {
         try {
-            const prisma = new PrismaClient();
             const athletes = await prisma.athlete.findMany();
             const index = await client.getOrCreateIndex('athletes');
             index.addDocuments(athletes).then((res) => console.log(res));

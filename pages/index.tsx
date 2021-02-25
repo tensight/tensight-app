@@ -1,12 +1,15 @@
-import Nav from '../components/nav';
-import CardList from '../components/cardlist';
-import Footer from '../components/footer';
-import { useEffect, useState } from 'react';
+import React from 'react'
+import { useEffect, useState } from 'react'
+import { athletesProps } from '../components/cardlist' 
+import Nav from '../components/nav'
+import CardList from '../components/cardlist'
+import Footer from '../components/footer'
 
-export default function IndexPage() {
-  const [search, setSearch] = useState("");
-  const [athletes, setAthletes] = useState([]);
-  const [athleteCards, setCards] = useState([]);
+
+const IndexPage: React.FC = () => {
+  const [search, setSearch] = useState("")
+  const [athletes, setAthletes] = useState([])
+  // const [athleteCards, setCards] = useState<Element>(<CardList />)
 
   useEffect(() => {
     const getAthletes = async (searchWord) => {
@@ -17,13 +20,13 @@ export default function IndexPage() {
     };
     getAthletes(search)
       .then(data => {
-        setAthletes(data.hits);
+        setAthletes(data.hits)
       });
   }, [search]);
 
-  useEffect(() => {
-    setCards(<CardList athletes={athletes} />)
-  }, [athletes]);
+  // useEffect(() => {
+  //   setCards(<CardList athletes={athletes} />)
+  // }, [athletes]);
 
 
   return (
@@ -73,7 +76,7 @@ export default function IndexPage() {
         </div>
       </div>
       <div>
-        {athleteCards}
+        <CardList athletes={athletes} />
       </div>
       <div className="">
         <h2 className="text-center text-xl font-serif">Favorite athlete missing? <a className="hover:underline" href="https://airtable.com/shrSgvaQ5Aj5892Wx">Submit it to the database!</a></h2>
@@ -82,3 +85,5 @@ export default function IndexPage() {
     </div>
   )
 }
+
+export default IndexPage
