@@ -19,7 +19,7 @@ model Athlete {
   popScore        Int?
   status          String?           @db.VarChar(255)
   heritage        String[]          @db.VarChar(2)
-  slug            String            @db.VarChar(255)
+  slug            String            @unique @db.VarChar(255)
   Sport           Sport             @relation(fields: [sport], references: [id])
   FavoriteMoments FavoriteMoments[]
 }
