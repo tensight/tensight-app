@@ -1,0 +1,7 @@
+services:
+- type: web
+  name: tensight-app
+  env: node
+  plan: starter
+  buildCommand: yarn; npx prisma generate; yarn build
+  startCommand: yarn start
