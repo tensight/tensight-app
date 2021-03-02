@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma';
+import prisma from '../lib/prisma'
 
 export async function getAllAthleteSlugs() {
   const athletes = await prisma.athlete.findMany();
@@ -9,7 +9,7 @@ export async function getAllAthleteSlugs() {
       }
     }
   })
-};
+}
 
 export async function getAthleteData(athleteSlug: string) {
   const athlete = await prisma.athlete.findUnique({
@@ -17,35 +17,35 @@ export async function getAthleteData(athleteSlug: string) {
       slug: athleteSlug,
     }
   });
-  return athlete;
+  return athlete
 }
 
 export async function getSortedAthletesData() {
-  const athletes = await prisma.athlete.findMany();
-  return athletes;
+  const athletes = await prisma.athlete.findMany()
+  return athletes
 };
 
 export function getEspnLeague(sportId: string) : string {
   switch (sportId) {
     case 'BAS':
-      return 'nba';
+      return 'nba'
     case 'TEN':
-      return 'tennis';
+      return 'tennis'
     case 'AFB':
-      return 'nfl';
+      return 'nfl'
     case 'BSB':
-      return 'mlb';
+      return 'mlb'
     case 'HOK':
-      return 'nhl';
+      return 'nhl'
     case 'GOL':
       return 'golf'
     default:
-      return '';
+      return ''
   }
-};
+}
 
-const availableLeagues = ['BAS', 'TEN', 'AFB', 'BSB', 'HOK', 'GOL'];
-const workaroundLeagues = ['FTB'];
+const availableLeagues = ['BAS', 'TEN', 'AFB', 'BSB', 'HOK', 'GOL']
+const workaroundLeagues = ['FTB']
 export function getAthleteHeadshot(espnId: number, sportId: string) : string {
   if (espnId !== null && availableLeagues.some(l => l === sportId)) {
     return `https://a.espncdn.com/combiner/i?img=/i/headshots/${getEspnLeague(sportId)}/players/full/${espnId}.png`
@@ -53,6 +53,6 @@ export function getAthleteHeadshot(espnId: number, sportId: string) : string {
     return 'https://www.futwiz.com/assets/img/fifa20/careerfaces/200104.png'
   } 
   else {
-    return './athlete.png';
+    return './athlete.png'
   }
 }

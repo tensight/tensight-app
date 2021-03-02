@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma';
+import prisma from '../lib/prisma'
 
 export async function getSportOfAthlete(athleteSlug: string) {
   const sport = await prisma.athlete.findUnique(
@@ -15,6 +15,6 @@ export async function getSportOfAthlete(athleteSlug: string) {
         }
       }
     }
-  );
-  return sport['Sport'];
-};
+  )
+  return sport['Sport']
+}
