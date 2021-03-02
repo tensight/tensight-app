@@ -1,6 +1,6 @@
 import prisma from '../lib/prisma'
 
-export async function getSportOfAthlete(athleteSlug: string) {
+export const getSportOfAthlete = async (athleteSlug: string) => {
   const sport = await prisma.athlete.findUnique(
     { 
       where: { slug: athleteSlug },
