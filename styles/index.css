@@ -11,6 +11,18 @@
   @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
 }
 
+.btn-purple {
+  @apply bg-purple-700 text-white font-bold py-2 px-4 rounded;
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
 /* Start purging... */
 @tailwind utilities;
 /* Stop purging. */
@@ -22,6 +34,10 @@
   padding: 2px 6px;
   position: absolute;
   z-index: 100;
+}
+
+.default-background {
+  background-color: #e5e5e3;
 }
 
 .tooltip:hover .tooltip-text {
