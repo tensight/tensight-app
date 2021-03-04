@@ -17,8 +17,9 @@ const Nav: React.FC = () => {
         </li>
         <ul className="flex justify-between items-center space-x-4">
           {links.map(({ href, label }) => (
+            
             <li key={`${href}${label}`}>
-              <a href={href} className="btn-blue no-underline">
+              <a href={href} className="btn-purple no-underline">
                 {label}
               </a>
             </li>
