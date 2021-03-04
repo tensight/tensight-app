@@ -6,7 +6,7 @@ export type athletesProps = Athlete[]
 const CardList: React.FC<{athletes: athletesProps}> = ({ athletes }) => {
   return (
     <section id="card-list" className="flex flex-wrap justify-items-start justify-center p-12 gap-2">
-      {athletes.length > 0 ? (
+      {typeof athletes !== 'undefined' && athletes.length > 0 ? (
         athletes.map((athlete) => (
           <Card
             key={athlete.id}
