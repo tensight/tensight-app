@@ -1,10 +1,11 @@
-import Nav from '../../components/nav';
-import { getAllAthleteSlugs, getAthleteData, getAthleteHeadshot, getEspnLeague } from '../../lib/athletes';
-import { getFlags } from '../../lib/countries';
-import { getSportOfAthlete } from '../../lib/sports';
+import Nav from '../../components/nav'
+import AthleteHeader from '../athlete/athleteheader'
+import { getAllAthleteSlugs, getAthleteData, getEspnLeague } from '../../lib/athletes'
+import { getSportOfAthlete } from '../../lib/sports'
+import { Athlete, Sport } from '@prisma/client'
 
 export async function getStaticPaths() {
-  const paths = await getAllAthleteSlugs();
+  const paths = await getAllAthleteSlugs()
   return {
     paths,
     fallback: false
@@ -20,10 +21,10 @@ export async function getStaticProps({params}) {
       sportOfAthlete
     }
   }
-};
+}
 
 function getLinks(athleteData) {
-  const links = [];
+  const links = []
   if (athleteData.olympediaId) {
     links.push(<li key="olympedia"><a className="hover:underline" href={`http://www.olympedia.org/athletes/${athleteData.olympediaId}`}>Olympedia</a></li>)
   }
@@ -37,10 +38,10 @@ function getLinks(athleteData) {
         {links}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default function AthletePage({ athleteData, sportOfAthlete }) {
+const AthletePage: React.FC<{athleteData: Athlete, sportOfAthlete: Sport}> = ({ athleteData, sportOfAthlete }) => {
   return (
     <div className="w-screen h-screen p-5">
       <style jsx global>{`
@@ -50,36 +51,10 @@ export default function AthletePage({ athleteData, sportOfAthlete }) {
         `}
       </style>
       <Nav />
-      <div>
-        <div className="text-2xl m-8">
-          <div className="flex flex-row items-center w-6/12 p-4 border-solid border-4 border-gray-700 border-opacity-50">
-            <div className="">
-              <img className="h-48 object-contain" src={getAthleteHeadshot(athleteData.espnId, athleteData.sport)}></img>
-            </div>
-            
-            <div id="athleteVitals">
-              <div className="flex">
-                <div>
-                  <h1 className="font-bold">{`${athleteData.firstName} ${athleteData.lastName}`}</h1>
-                </div>
-                <div>
-                  <h3 className="text-gray-600">&nbsp;{athleteData.nativeName == null ? '' : `(${athleteData.nativeName})`}</h3>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-gray-600">{athleteData.description == null ? '' : athleteData.description}</h3>
-              </div>
-              <div className="flex">
-                Heritage: {getFlags(athleteData.heritage).join(' · ')}
-              </div>
-              <div>
-                <h2 className="">Sport: <mark>{sportOfAthlete.sport}</mark></h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AthleteHeader athleteData={athleteData} sportOfAthlete={sportOfAthlete} />
       {getLinks(athleteData)}  
     </div>
   )
 }
+
+export default AthletePage
