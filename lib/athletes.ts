@@ -1,4 +1,5 @@
 import prisma from '../lib/prisma'
+import { Athlete, FavoriteMoments } from '@prisma/client'
 
 export const getAllAthleteSlugs = async () => {
   const athletes = await prisma.athlete.findMany();
@@ -16,14 +17,22 @@ export const getAthleteData = async (athleteSlug: string) => {
     where: {
       slug: athleteSlug,
     }
-  });
+  })
   return athlete
 }
 
 export const getSortedAthletesData = async () => {
   const athletes = await prisma.athlete.findMany()
   return athletes
-};
+}
+
+export const getAthleteFavMoments = async (athleteId) => {
+  return await prisma.favoriteMoments.findMany({
+    where: {
+      athleteId: athleteId
+    }
+  })
+}
 
 export const getEspnLeague = (sportId: string) : string => {
   switch (sportId) {
