@@ -1,5 +1,5 @@
 import Nav from '../../components/nav'
-import AthleteHeader from '../athlete/athleteheader'
+import AthleteHeader from '../../components/athleteheader'
 import { getAllAthleteSlugs, getAthleteData, getEspnLeague } from '../../lib/athletes'
 import { getSportOfAthlete } from '../../lib/sports'
 import { Athlete, Sport } from '@prisma/client'

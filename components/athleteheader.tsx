@@ -1,6 +1,6 @@
 import React from 'react'
-import { getAthleteHeadshot } from '../../lib/athletes'
-import { getFlag, getCountryName } from '../../lib/countries'
+import { getAthleteHeadshot } from '../lib/athletes'
+import { getFlag, getCountryName } from '../lib/countries'
 import { Athlete, Sport } from '@prisma/client'
 
 const convertFlagsToJSX = (countryIds: string[]) => {
