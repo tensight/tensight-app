@@ -53,7 +53,7 @@ const IndexPage: React.FC = () => {
         </div>
       </div>
       <div className="mt-4 px-12 flex justify-center">
-        <div className="text-center p-4 w-full shadow-2xl lg:w-1/2 border-4 border-indigo-700 border-opacity-100">
+        <div className="text-center py-4 px-2 w-full shadow-2xl lg:w-1/2 border-4 border-indigo-700 border-opacity-100">
           <h2 className="text-center">I'm looking for</h2>
           <div className="border rounded overflow-hidden flex justify-center mx-auto searchBox mt-6">
             <button className="flex items-center justify-center px-4 shadow-md text-black">

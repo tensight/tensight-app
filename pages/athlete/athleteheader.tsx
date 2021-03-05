@@ -7,7 +7,7 @@ const convertFlagsToJSX = (countryIds: string[]) => {
   const newFlags = []
   countryIds.forEach((id) => {
     newFlags.push(
-      <div className="has-tooltip mx-1 pointer-events-auto">
+      <div key={id} className="has-tooltip mx-1 pointer-events-auto">
         <span className="tooltip rounded shadow-lg p-1 text-lg bg-gray-200 text-gray-800 -mt-8">{getCountryName(id)}</span>
         {getFlag(id)}
       </div>
@@ -22,7 +22,13 @@ const AthleteHeader: React.FC<{athleteData: Athlete, sportOfAthlete: Sport}> = (
       <div className="text-2xl m-8">
         <div className="flex flex-row items-center w-1/2 p-2 border-solid border-4 border-gray-700 border-opacity-50">
           <div className="m-1">
-            <img className="h-48 object-contain" src={getAthleteHeadshot(athleteData.espnId, athleteData.sport)}></img>
+            <img className="h-48 object-contain"
+                 src={getAthleteHeadshot(athleteData.espnId, athleteData.sport)}
+                 onError={(e) => {
+                  (e.target as HTMLImageElement).onerror = null;
+                  (e.target as HTMLImageElement).src = "./athlete.png";
+                 }}
+            ></img>
           </div>
           <div id="athleteVitals" className="m-1">
             <div className="p-0 m-0">
