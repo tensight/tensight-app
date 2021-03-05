@@ -15,7 +15,7 @@ const CardList: React.FC<{athletes: athletesProps}> = ({ athletes }) => {
         ))
       ) : <p>Loading...</p>}  
     </section>
-  );
+  )
 }
 
 export default CardList
