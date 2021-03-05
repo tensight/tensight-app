@@ -14,6 +14,10 @@ module.exports = {
       },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      translate: ['motion-reduce'],
+    }
+  },
   plugins: [],
 }
