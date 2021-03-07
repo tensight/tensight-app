@@ -1,10 +1,9 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { athletesProps } from '../components/cardlist' 
+import CardList, { athletesProps } from '../components/homePage/cardlist' 
 import Nav from '../components/nav'
-import CardList from '../components/cardlist'
 import Footer from '../components/footer'
-
+import Head from 'next/head'
 
 const IndexPage: React.FC = () => {
   const [search, setSearch] = useState("")
@@ -31,6 +30,13 @@ const IndexPage: React.FC = () => {
 
   return (
     <div className="w-screen h-screen p-5 def-bg">
+      <Head>
+        <title>Tensight - Home</title>
+        <meta charSet="UTF-8" />
+        <meta name="description" content="Quickly discover athletes and their heritage" />
+        <meta name="keywords" content="Asian, Sports, Tensight" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <style jsx global>{`
           body {
             background-color: #e5e5e3;
