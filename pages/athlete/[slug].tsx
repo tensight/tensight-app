@@ -1,8 +1,9 @@
 import Nav from '../../components/nav'
-import AthleteHeader from '../../components/athleteheader'
-import { getAllAthleteSlugs, getAthleteData, getEspnLeague } from '../../lib/athletes'
+import AthleteHeader from '../../components/allAthletePages/athleteheader'
+import FavoriteMomentList from '../../components/allAthletePages/favoritemomentlist'
+import { getAllAthleteSlugs, getAthleteData, getEspnLeague, convertDateInFavMomentsToString, getAthleteFavMoments, FavoriteMomentsDateString } from '../../lib/athletes'
 import { getSportOfAthlete } from '../../lib/sports'
-import { Athlete, Sport } from '@prisma/client'
+import { Athlete, FavoriteMoment, Sport } from '@prisma/client'
 
 export async function getStaticPaths() {
   const paths = await getAllAthleteSlugs()
@@ -13,17 +14,28 @@ export async function getStaticPaths() {
 };
 
 export async function getStaticProps({params}) {
-  const athleteData = await getAthleteData(params.slug)
-  const sportOfAthlete = await getSportOfAthlete(params.slug)
+  const athleteData: Athlete = await getAthleteData(params.slug)
+  const sportOfAthlete: Sport = await getSportOfAthlete(params.slug)
+  const favMomentsOfAthlete: FavoriteMoment[] = await getAthleteFavMoments(athleteData.id)
+  const typeSafeFavMoments: FavoriteMomentsDateString[] = convertDateInFavMomentsToString(favMomentsOfAthlete)
   return {
     props: {
       athleteData,
-      sportOfAthlete
+      sportOfAthlete,
+      typeSafeFavMoments
     }
   }
 }
 
-function getLinks(athleteData) {
+function getFavoriteMoments(moments: FavoriteMomentsDateString[]) {
+  const newMoments = []
+  moments.forEach((moment) => {
+    newMoments.push(<div key={moment.id.toString()} className="m-8">{moment.description}</div>)
+  })
+  return newMoments
+}
+
+function getLinks(athleteData: Athlete) {
   const links = []
   if (athleteData.olympediaId) {
     links.push(<li key="olympedia"><a className="hover:underline" href={`http://www.olympedia.org/athletes/${athleteData.olympediaId}`}>Olympedia</a></li>)
@@ -41,7 +53,11 @@ function getLinks(athleteData) {
   )
 }
 
-const AthletePage: React.FC<{athleteData: Athlete, sportOfAthlete: Sport}> = ({ athleteData, sportOfAthlete }) => {
+const AthletePage: React.FC<{
+  athleteData: Athlete,
+  sportOfAthlete: Sport,
+  typeSafeFavMoments: FavoriteMomentsDateString[]
+}> = ({ athleteData, sportOfAthlete, typeSafeFavMoments }) => {
   return (
     <div className="w-screen h-screen p-5">
       <style jsx global>{`
@@ -52,7 +68,8 @@ const AthletePage: React.FC<{athleteData: Athlete, sportOfAthlete: Sport}> = ({ 
       </style>
       <Nav />
       <AthleteHeader athleteData={athleteData} sportOfAthlete={sportOfAthlete} />
-      {getLinks(athleteData)}  
+      <FavoriteMomentList favMoments={typeSafeFavMoments} />
+      {athleteData && getLinks(athleteData)}
     </div>
   )
 }

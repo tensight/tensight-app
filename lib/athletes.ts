@@ -1,5 +1,5 @@
 import prisma from '../lib/prisma'
-import { Athlete, FavoriteMoments } from '@prisma/client'
+import { Athlete, FavoriteMoment } from '@prisma/client'
 
 export const getAllAthleteSlugs = async () => {
   const athletes = await prisma.athlete.findMany();
@@ -26,14 +26,6 @@ export const getSortedAthletesData = async () => {
   return athletes
 }
 
-export const getAthleteFavMoments = async (athleteId) => {
-  return await prisma.favoriteMoments.findMany({
-    where: {
-      athleteId: athleteId
-    }
-  })
-}
-
 export const getEspnLeague = (sportId: string) : string => {
   switch (sportId) {
     case 'BAS':
@@ -52,6 +44,37 @@ export const getEspnLeague = (sportId: string) : string => {
       return ''
   }
 }
+
+/* Favorite Moments */
+
+export type FavoriteMomentsDateString = {
+  id: number,
+  createdAt?: string,
+  userId: number,
+  athleteId: number,
+  description: string,
+  url: string
+}
+
+export const getAthleteFavMoments = async (athleteId) => {
+  return await prisma.favoriteMoment.findMany({
+    where: {
+      athleteId: athleteId
+    }
+  })
+}
+
+export const convertDateInFavMomentsToString = (moments: FavoriteMoment[]): FavoriteMomentsDateString[] => {
+  const convertedMoments: FavoriteMomentsDateString[] = moments.map((moment) => {
+    let { createdAt, ...rest } = { ...moment }
+    const createdAtString = createdAt.toString()
+    rest['createdAt'] = createdAtString
+    return rest
+  })
+  return convertedMoments
+}
+
+/* Athlete Headshot Logic */
 
 const availableLeagues: string[] = ['BAS', 'TEN', 'AFB', 'BSB', 'HOK', 'GOL']
 const workaroundLeagues: string[] = ['FTB']
