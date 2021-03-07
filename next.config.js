@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ['espncdn.com', 'futwiz.com', 'imgur.com'],
+    domains: ['a.espncdn.com', 'cdn.discordapp.com', 'futwiz.com', 'i.imgur.com', 'media.giphy.com'],
   },
 }
