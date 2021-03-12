@@ -46,9 +46,7 @@ const IndexPage: React.FC = () => {
       <Nav />
       <div className=""></div>
       <div className="py-10 text-center">
-        <h1 className="text-5xl font-bold font-serif text-accent-1">
-          Tensight
-        </h1>
+        <div className="flex justify-center my-4"><img className="self-center" src="./tensight-hero.svg" width="300" /></div>
         <h2 className="text-2xl font-serif"> \ˈten-sīt \ (noun): a concept that describes sports and it's athletes as a <mark>global affair</mark>. 🌎</h2>
         <br></br>
         <div className="flex flex-inline justify-center">
