@@ -31,7 +31,7 @@ const IndexPage: React.FC = () => {
   return (
     <div className="w-screen h-screen p-5 def-bg">
       <Head>
-        <title>Tensight - Home</title>
+        <title>Tensight</title>
         <meta charSet="UTF-8" />
         <meta name="description" content="Quickly discover athletes and their heritage" />
         <meta name="keywords" content="Asian, Sports, Tensight" />
