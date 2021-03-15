@@ -47,32 +47,39 @@ export const getEspnLeague = (sportId: string) : string => {
 
 /* Favorite Moments */
 
-export type FavoriteMomentsDateString = {
+export type FavoriteMomentNoDateWithUser = {
   id: number,
-  createdAt?: string,
   userId: number,
   athleteId: number,
   description: string,
-  url: string
+  url: string,
+  User: {
+    name: string,
+    image: string
+  }
 }
 
 export const getAthleteFavMoments = async (athleteId) => {
   return await prisma.favoriteMoment.findMany({
+    select: {
+      id: true,
+      userId: true,
+      athleteId: true,
+      description: true,
+      url: true,
+      User: {
+        select: {
+          name: true,
+          image: true,
+        }
+      }
+    },
     where: {
-      athleteId: athleteId
-    }
+      athleteId: parseInt(athleteId)
+    },
   })
 }
 
-export const convertDateInFavMomentsToString = (moments: FavoriteMoment[]): FavoriteMomentsDateString[] => {
-  const convertedMoments: FavoriteMomentsDateString[] = moments.map((moment) => {
-    let { createdAt, ...rest } = { ...moment }
-    const createdAtString = createdAt.toString()
-    rest['createdAt'] = createdAtString
-    return rest
-  })
-  return convertedMoments
-}
 
 /* Athlete Headshot Logic */
 
