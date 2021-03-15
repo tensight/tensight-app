@@ -1,7 +1,7 @@
-import { FavoriteMomentsDateString } from "../../lib/athletes"
+import { FavoriteMomentNoDateWithUser } from "../../lib/athletes"
 import Image from 'next/image'
 
-const FavoriteMomentComponent: React.FC<{ favMoment: FavoriteMomentsDateString }> = ({ favMoment }) => {
+const FavoriteMomentComponent: React.FC<{ favMoment: FavoriteMomentNoDateWithUser }> = ({ favMoment }) => {
   return (
     <div className="flex">
       <div className="p-2">
@@ -28,11 +28,11 @@ const FavoriteMomentComponent: React.FC<{ favMoment: FavoriteMomentsDateString }
           </div>
           <div className="text-base font-normal mx-2 my-5 sm:mt-2 sm:mb-4">·</div>
           <div className="flex justify-evenly items-center text-sm font-medium my-5 sm:mt-2 sm:mb-4">
-            <span className="mr-2">username</span>
+            <span className="mr-2">{favMoment.User.name}</span>
             <div className="flex items-center mr-2">
               <Image
-                src='/user-1.jpg' //TODO: Change
-                alt='user-1' // TODO: Change
+                src={favMoment.User.image} //TODO: Change
+                alt={favMoment.User.name} // TODO: Change
                 width={25}
                 height={25}
                 className="rounded-full"

@@ -1,7 +1,7 @@
 import FavoriteMomentComponent from './favoritemoment'
-import { FavoriteMomentsDateString } from "../../lib/athletes"
+import { FavoriteMomentNoDateWithUser } from "../../lib/athletes"
 
-const FavoriteMomentList: React.FC<{ favMoments: FavoriteMomentsDateString[] }> = ({ favMoments }) => {
+const FavoriteMomentList: React.FC<{ favMoments: FavoriteMomentNoDateWithUser[] }> = ({ favMoments }) => {
   return (
     <div className="m-8">
       <h2 className="text-2xl">Favorite Moments</h2>
