@@ -9,6 +9,21 @@ const providers = [
     clientId: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET
   }),
+  Providers.Twitter({
+    clientId: process.env.TWITTER_CLIENT_ID,
+    clientSecret: process.env.TWITTER_CLIENT_SECRET
+  }),
+  // Providers.Email({
+  //   server: {
+  //     host: process.env.EMAIL_SERVER_HOST,
+  //     port: parseInt(process.env.EMAIL_SERVER_PORT),
+  //     auth: {
+  //       user: process.env.EMAIL_SERVER_USER,
+  //       pass: process.env.EMAIL_SERVER_PASSWORD
+  //     }
+  //   },
+  //   from: process.env.EMAIL_FROM
+  // }),
 ]
 
 const callbacks: Callbacks = {}
