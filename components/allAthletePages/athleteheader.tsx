@@ -18,10 +18,10 @@ const convertFlagsToJSX = (countryIds: string[]) => {
 
 const AthleteHeader: React.FC<{athleteData: Athlete, sportOfAthlete: Sport}> = ({athleteData, sportOfAthlete}) => {
   return (
-    <div>
+    <div className="w-auto lg:w-3/5">
       <div className="text-2xl m-8">
-        <div className="flex flex-row items-center w-1/2 p-2 border-solid border-4 border-gray-700 border-opacity-50">
-          <div className="m-1">
+        <div className="flex flex-row items-center w-full p-2 border-solid border-4 border-gray-700 border-opacity-50">
+          <div className="m-1 min-w-6">
             <img className="h-48 object-contain"
                  src={getAthleteHeadshot(athleteData.espnId, athleteData.sport)}
                  onError={(e) => {
