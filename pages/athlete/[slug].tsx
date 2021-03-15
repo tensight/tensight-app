@@ -2,6 +2,8 @@ import { Athlete, Sport } from '@prisma/client'
 import AthleteHeader from '../../components/allAthletePages/athleteheader'
 import FavoriteMomentList from '../../components/allAthletePages/favoritemomentlist'
 import { FavoriteMomentNoDateWithUser, getAllAthleteSlugs, getAthleteData, getAthleteFavMoments, getEspnLeague } from '../../lib/athletes'
+import { getFlags } from '../../lib/countries'  
+import Head from 'next/head'
 import Nav from '../../components/nav'
 import { getSportOfAthlete } from '../../lib/sports'
 import useSWR from 'swr'
@@ -18,7 +20,7 @@ export async function getStaticProps({ params }) {
   const athleteData: Athlete = await getAthleteData(params.slug)
   const sportOfAthlete: Sport = await getSportOfAthlete(params.slug)
   const favMoments: FavoriteMomentNoDateWithUser[] = await getAthleteFavMoments(athleteData.id)
-  
+
   return {
     props: {
       athleteData,
@@ -60,6 +62,13 @@ const AthletePage: React.FC<{
 
   return (
     <div className="w-screen h-screen p-5">
+      <Head>
+        <title>{athleteData.firstName} {athleteData.lastName} {getFlags(athleteData.heritage).join('  ')}</title>
+        <meta charSet="UTF-8" />
+        <meta name="description" content="Quickly discover athletes and their heritage" />
+        <meta name="keywords" content={`Asian, Sports, Tensight, ${athleteData.firstName} ${athleteData.lastName}`} />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <style jsx global>{`
           body {
             background-color: #e5e5e3;
