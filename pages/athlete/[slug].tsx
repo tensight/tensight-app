@@ -1,7 +1,9 @@
 import { Athlete, Sport } from '@prisma/client'
 import AthleteHeader from '../../components/allAthletePages/athleteheader'
+import AthleteLayout from '../../layout/AthleteLayout'
 import FavoriteMomentList from '../../components/allAthletePages/favoritemomentlist'
 import { FavoriteMomentNoDateWithUser, getAllAthleteSlugs, getAthleteData, getAthleteFavMoments, getEspnLeague } from '../../lib/athletes'
+import { AthleteMDX, getFileBySlug } from '../../lib/mdx'
 import { getFlags } from '../../lib/countries'  
 import Head from 'next/head'
 import Nav from '../../components/nav'
@@ -14,18 +16,20 @@ export async function getStaticPaths() {
     paths,
     fallback: false
   }
-};
+}
 
 export async function getStaticProps({ params }) {
   const athleteData: Athlete = await getAthleteData(params.slug)
   const sportOfAthlete: Sport = await getSportOfAthlete(params.slug)
   const favMoments: FavoriteMomentNoDateWithUser[] = await getAthleteFavMoments(athleteData.id)
+  const athleteProfile: AthleteMDX | null = await getFileBySlug('athletes', params.slug)
 
   return {
     props: {
       athleteData,
       sportOfAthlete,
-      favMoments
+      favMoments,
+      athleteProfile
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
@@ -52,11 +56,14 @@ function getLinks(athleteData: Athlete) {
   )
 }
 
-const AthletePage: React.FC<{
-  athleteData: Athlete,
-  sportOfAthlete: Sport,
-  favMoments: FavoriteMomentNoDateWithUser[]
-}> = ({ athleteData, sportOfAthlete, favMoments }) => {
+interface AthletePageProps {
+  athleteData: Athlete;
+  sportOfAthlete: Sport;
+  favMoments: FavoriteMomentNoDateWithUser[];
+  athleteProfile?: AthleteMDX;
+}
+
+const AthletePage: React.FC<AthletePageProps> = ({ athleteData, sportOfAthlete, favMoments, athleteProfile }) => {
   const { data } = useSWR(`/api/athlete/favoritemoments?id=${athleteData.id}`, { initialData: favMoments })
   console.log(data)
 
@@ -76,9 +83,15 @@ const AthletePage: React.FC<{
         `}
       </style>
       <Nav />
-      <AthleteHeader athleteData={athleteData} sportOfAthlete={sportOfAthlete} />
-      <FavoriteMomentList favMoments={data} />
-      {athleteData && getLinks(athleteData)}
+      <div className="px-8">
+        <AthleteHeader athleteData={athleteData} sportOfAthlete={sportOfAthlete} />
+        <AthleteLayout
+          mdxSource={athleteProfile.mdxSource}
+          frontMatter={athleteProfile.frontMatter}
+        />
+        <FavoriteMomentList favMoments={data} />
+        {athleteData && getLinks(athleteData)}
+      </div>
     </div>
   )
 }
