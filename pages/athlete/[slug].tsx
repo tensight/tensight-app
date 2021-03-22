@@ -85,10 +85,11 @@ const AthletePage: React.FC<AthletePageProps> = ({ athleteData, sportOfAthlete, 
       <Nav />
       <div className="px-8">
         <AthleteHeader athleteData={athleteData} sportOfAthlete={sportOfAthlete} />
-        <AthleteLayout
-          mdxSource={athleteProfile.mdxSource}
-          frontMatter={athleteProfile.frontMatter}
-        />
+        { athleteProfile &&
+          <AthleteLayout
+            mdxSource={athleteProfile.mdxSource}
+            frontMatter={athleteProfile.frontMatter}
+          /> }
         <FavoriteMomentList favMoments={data} />
         {athleteData && getLinks(athleteData)}
       </div>
