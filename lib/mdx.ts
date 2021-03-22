@@ -19,16 +19,18 @@ export type FrontMatter = {
 export type AthleteMDX = {
   mdxSource: MdxRemote.Source,
   frontMatter: FrontMatter
-}
+} | null
 
-export async function getFileBySlug(type: string, slug: undefined|string) {
+export async function getFileBySlug(type: string, slug: undefined|string): Promise<AthleteMDX> {
   const filePath: string = slug
     ? path.join(root, 'data', type, `${slug}.mdx`)
     : path.join(root, 'data', `${type}.mdx`)
 
-  const source = fs.existsSync(filePath)
-    ? fs.readFileSync(filePath, 'utf8')
-    : ''
+  if (!fs.existsSync(filePath)) {
+    return null
+  }
+
+  const source = fs.readFileSync(filePath, 'utf8')
 
   const { data, content } = matter(source)
   const mdxSource = await renderToString(content, {
