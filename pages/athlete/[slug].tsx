@@ -1,6 +1,6 @@
 import { Athlete, Sport } from '@prisma/client'
 import AthleteHeader from '../../components/allAthletePages/athleteheader'
-import AthleteLayout from '../../layout/AthleteLayout'
+import AthleteLayout from '../../layouts/AthleteLayout'
 import FavoriteMomentList from '../../components/allAthletePages/favoritemomentlist'
 import { FavoriteMomentNoDateWithUser, getAllAthleteSlugs, getAthleteData, getAthleteFavMoments, getEspnLeague } from '../../lib/athletes'
 import { AthleteMDX, getFileBySlug } from '../../lib/mdx'
