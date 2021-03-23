@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const client = new MeiliSearch({ // TODO: Is it computationally expensive to keep creating new clients?
     host: process.env.MEILISEARCH_HOST,
-    apiKey: process.env.MEILISEARCH_API_KEY,
+    // apiKey: process.env.MEILISEARCH_API_KEY,
   });
 
   if (!client)
