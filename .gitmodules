@@ -1,0 +1,4 @@
+[submodule "data/athletes"]
+	path = data/athletes
+	url = https://github.com/tensight/athletes.git
+	branch = main
