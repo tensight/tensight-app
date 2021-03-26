@@ -47,7 +47,7 @@ const IndexPage: React.FC = () => {
       <div className=""></div>
       <div className="py-10 text-center">
         <div className="flex justify-center my-4"><img className="self-center" src="./tensight-hero.svg" width="300" /></div>
-        <h2 className="text-2xl font-serif"> \ˈten-sīt \ (noun): the web's largest collective knowledge-base of Asian-American athletes 🌎</h2>
+        <h2 className="text-2xl font-serif"> \ˈten-sīt \ (noun): the web's largest community of Asian-American athletes 🌎</h2>
         <br></br>
         <div className="flex flex-inline justify-center">
           <h2 className="text-2xl font-serif">Search the data for your favorite athlete/country below &nbsp;</h2>
