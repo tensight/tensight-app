@@ -1,29 +1,10 @@
-import React, { useState } from 'react'
-import { useSession } from 'next-auth/client'
 import Link from 'next/link'
+import { useSession } from 'next-auth/client'
+import { useState } from 'react'
 
-const Nav: React.FC = () => {
+const Nav = () => {
   const [session, loading] = useSession()
   const [isOpen, setIsOpen] = useState(false)
-
-  // const links = [
-  //   { href: 'https://github.com/tensight', label: 'GitHub' },
-  // ]
-
-  // const getLinksJSX = (links) => {
-  //   session
-  //     ? links.push({ href: '/profile', label: 'Profile' })
-  //     : links.push({ href: '/api/auth/signin', label: 'Sign in' })
-  //   return links.map(({ href, label }) => (
-  //     <li key={`${href}${label}`}>
-  //       <Link href={href}>
-  //         <a className="btn-purple no-underline">
-  //           {label}
-  //         </a>
-  //       </Link>
-  //     </li>
-  //   ))
-  // }
 
   return (
     <>

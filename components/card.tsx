@@ -1,12 +1,15 @@
-import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Athlete } from '@prisma/client' 
-import { getAthleteData, getAthleteHeadshot } from '../../lib/athletes'
-import { countries } from '../../data/countries'
-import { getFlags } from '../../lib/countries'
+import { getAthleteData, getAthleteHeadshot } from '@/lib/athletes'
+import { getFlags } from '@/lib/countries'
+import { countries } from '@/data/countries'
+import { Athlete } from '@prisma/client'
 
-const Card: React.FC<{athlete: Athlete}> = ({ athlete }) => {
+type Props = {
+  athlete: Athlete
+}
+
+const Card = ({ athlete }: Props) => {
   return (
     <Link href={`/athlete/${encodeURIComponent(athlete.slug)}`}>
       <a>
