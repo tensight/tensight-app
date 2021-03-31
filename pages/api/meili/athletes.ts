@@ -1,22 +1,22 @@
 const MeiliSearch = require('meilisearch')
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../../lib/prisma'
-import { countries } from '../../../data/countries'
+import prisma from '@/lib/prisma'
+import { countries } from '@/data/countries'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { q }
-  } = req;
+  } = req
 
   const client = new MeiliSearch({ // TODO: Is it computationally expensive to keep creating new clients?
     host: process.env.MEILISEARCH_HOST,
     // apiKey: process.env.MEILISEARCH_API_KEY,
-  });
+  })
 
   if (!client)
     return res.status(500).json({
       error: new Error('Missing MeiliSearch environment variables'),
-    });
+    })
 
   if (req.method === 'POST') {
     try {
@@ -54,4 +54,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(500).json({ error })
     }
   }
-};
+}

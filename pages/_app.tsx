@@ -1,9 +1,9 @@
-import '../styles/index.css'
+import '@/styles/index.css'
 import { AppProps } from 'next/app'
 import { Provider } from 'next-auth/client'
 import { SWRConfig } from 'swr'
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <Provider session={pageProps.session}>
       <SWRConfig

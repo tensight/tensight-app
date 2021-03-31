@@ -1,32 +1,25 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import CardList, { athletesProps } from '../components/homePage/cardlist' 
-import Nav from '../components/nav'
-import Footer from '../components/footer'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import CardList, { athletesProps } from '@/components/cardlist' 
+import Footer from '@/components/footer'
+import Nav from '@/components/nav'
 
-const IndexPage: React.FC = () => {
+const IndexPage = () => {
   const [search, setSearch] = useState("")
   const [athletes, setAthletes] = useState([])
-  // const [athleteCards, setCards] = useState<Element>(<CardList />)
 
   useEffect(() => {
     const getAthletes = async (searchWord) => {
       const response = await fetch(`/api/meili/athletes?q=${encodeURIComponent(searchWord)}`, {
         method: 'GET'
-      });
+      })
       return response.json()
-    };
+    }
     getAthletes(search)
       .then(data => {
         setAthletes(data.hits)
-      });
-  }, [search]);
-
-  // useEffect(() => {
-  //   setCards(<CardList athletes={athletes} />)
-  // }, [athletes]);
-
+      })
+  }, [search])
 
   return (
     <div className="w-screen h-screen p-5 def-bg">
@@ -47,7 +40,7 @@ const IndexPage: React.FC = () => {
       <div className=""></div>
       <div className="py-10 text-center">
         <div className="flex justify-center my-4"><img className="self-center" src="./tensight-hero.svg" width="300" /></div>
-        <h2 className="text-2xl font-serif"> \ˈten-sīt \ (noun): a concept that describes sports and it's athletes as a <mark>global affair</mark>. 🌎</h2>
+        <h2 className="text-2xl font-serif"> \ˈten-sīt \ (noun): the web's largest community of Asian-American athletes 🌎</h2>
         <br></br>
         <div className="flex flex-inline justify-center">
           <h2 className="text-2xl font-serif">Search the data for your favorite athlete/country below &nbsp;</h2>
@@ -74,7 +67,7 @@ const IndexPage: React.FC = () => {
               type="text"
               onChange={(event) => setSearch(event.target.value)}
               className="px-6 py-4 w-full text-black rounded-md"
-              placeholder="손흥민, Yuta Watanabe, CN, ..."
+              placeholder="손흥민, Yuta Watanabe, China, ..."
             />
           </div>
         </div>

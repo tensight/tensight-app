@@ -1,8 +1,7 @@
-import { FavoriteMoment } from '@prisma/client'
-import { FavoriteMomentNoDateWithUser } from '../../../lib/athletes'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma, { Prisma } from '../../../lib/prisma'
-
+import { FavoriteMomentNoDateWithUser } from '@/lib/athletes'
+import prisma, { Prisma } from '@/lib/prisma'
+import { FavoriteMoment } from '@prisma/client'
 
 /**
  * Handles POST and GET requests to /api/athlete/favoritemoment.

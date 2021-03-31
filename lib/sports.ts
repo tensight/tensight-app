@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma'
+import prisma from '@/lib/prisma'
 
 export const getSportOfAthlete = async (athleteSlug: string) => {
   const sport = await prisma.athlete.findUnique(

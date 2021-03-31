@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth, { Callbacks, InitOptions } from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters, { Adapter } from 'next-auth/adapters'
-import prisma from '../../../lib/prisma'
+import prisma from '@/lib/prisma'
 
 const providers = [
   Providers.Discord({
