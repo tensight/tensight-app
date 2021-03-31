@@ -1,32 +1,25 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import CardList, { athletesProps } from '../components/homePage/cardlist' 
-import Nav from '../components/nav'
-import Footer from '../components/footer'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import CardList, { athletesProps } from '@/components/cardlist' 
+import Footer from '@/components/footer'
+import Nav from '@/components/nav'
 
-const IndexPage: React.FC = () => {
+const IndexPage = () => {
   const [search, setSearch] = useState("")
   const [athletes, setAthletes] = useState([])
-  // const [athleteCards, setCards] = useState<Element>(<CardList />)
 
   useEffect(() => {
     const getAthletes = async (searchWord) => {
       const response = await fetch(`/api/meili/athletes?q=${encodeURIComponent(searchWord)}`, {
         method: 'GET'
-      });
+      })
       return response.json()
-    };
+    }
     getAthletes(search)
       .then(data => {
         setAthletes(data.hits)
-      });
-  }, [search]);
-
-  // useEffect(() => {
-  //   setCards(<CardList athletes={athletes} />)
-  // }, [athletes]);
-
+      })
+  }, [search])
 
   return (
     <div className="w-screen h-screen p-5 def-bg">

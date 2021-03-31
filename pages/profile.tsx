@@ -1,8 +1,7 @@
-import { GetStaticProps } from 'next'
-import { useSession } from 'next-auth/client'
 import Image from 'next/image'
+import { useSession } from 'next-auth/client'
 
-const ProfilePage: React.FC = () => {
+const ProfilePage = () => {
   const [session, loading] = useSession()
 
   return (
@@ -27,9 +26,5 @@ const ProfilePage: React.FC = () => {
     </div>
   )
 }
-
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   const awards = await getUser()
-// }
 
 export default ProfilePage
