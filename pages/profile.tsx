@@ -1,10 +1,12 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSession } from 'next-auth/client'
 
 const ProfilePage = () => {
   const [session, loading] = useSession()
 
   return (
+    
     <div className="w-full h-full flex justify-center items-center p-8">
       <style jsx global>{`
           body {
@@ -12,7 +14,14 @@ const ProfilePage = () => {
           }
         `}
       </style>
-      <header className="flex">
+      {!session &&
+        <div className="font-semibold text-3xl">
+          Not signed in. Please &nbsp;
+          <Link href='/api/auth/signin'>
+            <a>Sign in</a>
+          </Link>
+        </div>}
+      {session && <header className="flex">
         <div className="text-center">
           <Image
             src={`${session.user.image}`}
@@ -22,7 +31,7 @@ const ProfilePage = () => {
           />
           <h1 className="text-3xl font-bold">{session.user.name}</h1>
         </div>
-      </header>
+      </header>}
     </div>
   )
 }
