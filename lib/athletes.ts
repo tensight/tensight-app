@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma'
+import prisma from '@/lib/prisma'
 import { Athlete, FavoriteMoment } from '@prisma/client'
 
 export const getAllAthleteSlugs = async () => {
@@ -59,7 +59,7 @@ export type FavoriteMomentNoDateWithUser = {
   }
 }
 
-export const getAthleteFavMoments = async (athleteId) => {
+export const getAthleteFavMoments = async (athleteId: number) => {
   return await prisma.favoriteMoment.findMany({
     select: {
       id: true,
@@ -75,11 +75,10 @@ export const getAthleteFavMoments = async (athleteId) => {
       }
     },
     where: {
-      athleteId: parseInt(athleteId)
+      athleteId: athleteId
     },
   })
 }
-
 
 /* Athlete Headshot Logic */
 
