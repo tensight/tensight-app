@@ -1,10 +1,9 @@
 import fs from 'fs'
-import matter from 'gray-matter'
 import { MdxRemote } from 'next-mdx-remote/types'
-import path from 'path'
 import renderToString from 'next-mdx-remote/render-to-string'
-
-import MDXComponents from '../components/MDXComponents'
+import matter from 'gray-matter'
+import path from 'path'
+import MDXComponents from '@/components/MDXComponents'
 
 const root = process.cwd()
 

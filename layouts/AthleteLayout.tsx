@@ -1,18 +1,19 @@
-import { FrontMatter } from '../lib/mdx'
 import hydrate from 'next-mdx-remote/hydrate'
-import Image from 'next/image'
-import MDXComponents from '../components/MDXComponents'
 import { MdxRemote } from 'next-mdx-remote/types'
+import Image from 'next/image'
 import { parseISO, format } from 'date-fns'
+import MDXComponents from '@/components/MDXComponents'
+import { FrontMatter } from '@/lib/mdx'
 
+type Props = { 
+  mdxSource: MdxRemote.Source,
+  frontMatter: FrontMatter
+}
 
-const AthleteLayout: React.FC<{ mdxSource: MdxRemote.Source, frontMatter: FrontMatter }> = ({
-  mdxSource,
-  frontMatter
-}) => {
+const AthleteLayout = ({ mdxSource, frontMatter }: Props) => {
   const content = hydrate(mdxSource, {
     components: MDXComponents
-  });
+  })
 
   return (
     <article className="m-8">
@@ -30,7 +31,7 @@ const AthleteLayout: React.FC<{ mdxSource: MdxRemote.Source, frontMatter: FrontM
           {format(parseISO(frontMatter.publishedAt), 'MMMM dd, yyyy')}
         </p>
       </div>
-      <div className="prose max-w-none w-full pr-4">
+      <div className="prose max-w-2xl w-full pr-4">
         {content}
       </div>
     </article>

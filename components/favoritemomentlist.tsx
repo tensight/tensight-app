@@ -1,14 +1,18 @@
-import FavoriteMomentComponent from './favoritemoment'
-import { FavoriteMomentNoDateWithUser } from "../../lib/athletes"
+import FavoriteMoment from '@/components/favoritemoment'
+import { FavoriteMomentNoDateWithUser } from '@/lib/athletes'
 
-const FavoriteMomentList: React.FC<{ favMoments: FavoriteMomentNoDateWithUser[] }> = ({ favMoments }) => {
+type Props = { 
+  favMoments: FavoriteMomentNoDateWithUser[]
+}
+
+const FavoriteMomentList = ({ favMoments }: Props) => {
   return (
     <div className="m-8">
       <h2 className="text-2xl">Favorite Moments</h2>
       <div className="flex flex-row">
         {typeof favMoments !== 'undefined' && favMoments.length > 0 ? (
           favMoments.map((moment) => (
-            <FavoriteMomentComponent
+            <FavoriteMoment
               key={moment.id}
               favMoment={moment}
             />

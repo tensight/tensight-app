@@ -1,8 +1,7 @@
-import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer className="w-full text-center border-t border-grey p-4 pin-b">
       <Link href="https://www.buymeacoffee.com/alexnaka">

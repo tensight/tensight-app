@@ -1,7 +1,12 @@
-import { FavoriteMomentNoDateWithUser } from "../../lib/athletes"
 import Image from 'next/image'
+import { FavoriteMomentNoDateWithUser } from '@/lib/athletes'
 
-const FavoriteMomentComponent: React.FC<{ favMoment: FavoriteMomentNoDateWithUser }> = ({ favMoment }) => {
+
+type Props = {
+  favMoment: FavoriteMomentNoDateWithUser
+}
+
+const FavoriteMoment = ({ favMoment }: Props) => {
   return (
     <div className="flex">
       <div className="p-2">
@@ -45,4 +50,4 @@ const FavoriteMomentComponent: React.FC<{ favMoment: FavoriteMomentNoDateWithUse
   )
 }
 
-export default FavoriteMomentComponent
+export default FavoriteMoment

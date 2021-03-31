@@ -1,22 +1,13 @@
-import React from 'react'
-import { getAthleteHeadshot } from '../../lib/athletes'
-import { getFlag, getCountryName } from '../../lib/countries'
+import { getAthleteHeadshot } from '@/lib/athletes'
+import { getFlag, getCountryName } from '@/lib/countries'
 import { Athlete, Sport } from '@prisma/client'
 
-const convertFlagsToJSX = (countryIds: string[]) => {
-  const newFlags = []
-  countryIds.forEach((id) => {
-    newFlags.push(
-      <div key={id} className="has-tooltip mx-1 pointer-events-auto">
-        <span className="tooltip rounded shadow-lg p-1 text-lg bg-gray-200 text-gray-800 -mt-8">{getCountryName(id)}</span>
-        {getFlag(id)}
-      </div>
-    )
-  })
-  return newFlags
+type Props = {
+  athleteData: Athlete,
+  sportOfAthlete: Sport
 }
 
-const AthleteHeader: React.FC<{athleteData: Athlete, sportOfAthlete: Sport}> = ({athleteData, sportOfAthlete}) => {
+const AthleteHeader = ({athleteData, sportOfAthlete}: Props) => {
   return (
     <div className="w-auto lg:w-3/5">
       <div className="text-2xl m-8">
@@ -55,3 +46,16 @@ const AthleteHeader: React.FC<{athleteData: Athlete, sportOfAthlete: Sport}> = (
 }
 
 export default AthleteHeader
+
+const convertFlagsToJSX = (countryIds: string[]) => {
+  const newFlags = []
+  countryIds.forEach((id) => {
+    newFlags.push(
+      <div key={id} className="has-tooltip mx-1 pointer-events-auto">
+        <span className="tooltip rounded shadow-lg p-1 text-lg bg-gray-200 text-gray-800 -mt-8">{getCountryName(id)}</span>
+        {getFlag(id)}
+      </div>
+    )
+  })
+  return newFlags
+}
