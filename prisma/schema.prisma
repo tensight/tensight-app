@@ -39,6 +39,7 @@ model Athlete {
   popScore        Int?              @map("pop_score")
   status          String?           @db.VarChar(255)
   heritage        String[]          @db.VarChar(2)
+  headshotUrl     String?           @map("headshot_url")
   slug            String            @unique @db.VarChar(255)
   Sport           Sport             @relation(fields: [sport], references: [id])
   FavoriteMoments FavoriteMoment[]
