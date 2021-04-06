@@ -1,8 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { getAthleteData, getAthleteHeadshot } from '@/lib/athletes'
+import { getAthleteHeadshot } from '@/lib/athletes'
 import { getFlags } from '@/lib/countries'
-import { countries } from '@/data/countries'
 import { Athlete } from '@prisma/client'
 
 type Props = {
@@ -21,7 +19,7 @@ const Card = ({ athlete }: Props) => {
         <header id="card-header">
           <div className="mx-auto">
             <img className="w-full h-48 object-contain"
-              src={getAthleteHeadshot(athlete.espnId, athlete.sport)}
+              src={getAthleteHeadshot(athlete.headshotUrl, athlete.espnId, athlete.sport)}
               onError={(e) => {
                 (e.target as HTMLImageElement).onerror = null;
                 (e.target as HTMLImageElement).src = "./athlete.png";
