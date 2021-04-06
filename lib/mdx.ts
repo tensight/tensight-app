@@ -7,7 +7,7 @@ import MDXComponents from '@/components/MDXComponents'
 
 const root = process.cwd()
 
-type FrontMatter = {
+export type FrontMatter = {
   wordCount: number,
   slug: string,
   title?: string,
