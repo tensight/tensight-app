@@ -39,11 +39,8 @@ const Nav = () => {
             </div>
           </div>
           <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-            <Link href="#">
-              <a className="font-medium text-gray-500 hover:text-gray-900">Product</a>
-            </Link>
-            <Link href="#">
-              <a className="font-medium text-gray-500 hover:text-gray-900">Features</a>
+            <Link href="/about">
+              <a className="font-medium text-gray-500 hover:text-gray-900">About</a>
             </Link>
             <Link href={`${session ? '/profile' : '/api/auth/signin'}`}>
               <a className="font-medium text-indigo-600 hover:text-indigo-500">{`${session ? 'Profile' : 'Sign in'}`}</a>
@@ -75,14 +72,11 @@ const Nav = () => {
               </div>
             </div>
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link href="#">
-                <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Product</a>
-              </Link>
-              <Link href="#">
-                <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Features</a>
+              <Link href="/about">
+                <a className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">About</a>
               </Link>
             </div>
-            <Link href={`${session ? './profile' : '/api/auth/signin'}`}>
+            <Link href={`${session ? '/profile' : '/api/auth/signin'}`}>
               <a className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
                 {`${session ? 'Profile' : 'Sign in'}`}
               </a>
