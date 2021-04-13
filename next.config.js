@@ -5,6 +5,7 @@ module.exports = {
   },
   images: {
     domains: [
+      'ak-static.cms.nba.com',
       'a.espncdn.com', 
       'cdn.discordapp.com', 
       'futwiz.com', 
