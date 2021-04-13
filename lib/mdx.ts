@@ -15,12 +15,12 @@ export type FrontMatter = {
   by?: string
 }
 
-export type AthleteMDX = {
+export type FileMDX = {
   mdxSource: MdxRemote.Source,
   frontMatter: FrontMatter
 } | null
 
-export async function getFileBySlug(type: string, slug: undefined|string): Promise<AthleteMDX> {
+export async function getFileBySlug(type: string, slug: undefined|string): Promise<FileMDX> {
   const filePath: string = slug
     ? path.join(root, 'data', type, `${slug}.mdx`)
     : path.join(root, 'data', `${type}.mdx`)

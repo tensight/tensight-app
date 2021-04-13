@@ -83,14 +83,16 @@ export const getAthleteFavMoments = async (athleteId: number) => {
 /* Athlete Headshot Logic */
 
 const availableLeagues: string[] = ['BAS', 'TEN', 'AFB', 'BSB', 'HOK', 'GOL']
-const workaroundLeagues: string[] = ['FTB']
-export const getAthleteHeadshot = (espnId: number, sportId: string) : string  => {
-  if (espnId !== null && availableLeagues.some(l => l === sportId)) {
+const workaroundLeagues: string[] = ['FTB', 'SWI']
+export const getAthleteHeadshot = (headshotUrl: string|null, espnId: number, sportId: string) : string  => {
+  if (headshotUrl !== null) {
+    return headshotUrl
+  } else if (espnId !== null && availableLeagues.some(l => l === sportId)) {
     return `https://a.espncdn.com/combiner/i?img=/i/headshots/${getEspnLeague(sportId)}/players/full/${espnId}.png`
   } else if (espnId == 149945) {
     return 'https://www.futwiz.com/assets/img/fifa20/careerfaces/200104.png'
   } 
   else {
-    return './athlete.png'
+    return '/athlete.png'
   }
 }

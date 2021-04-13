@@ -43,3 +43,23 @@
 .tooltip:hover .tooltip-text {
   visibility: visible;
 }
+
+@layer base {
+
+  *,
+  *::before,
+  *::after {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  svg {
+    overflow: initial;
+  }
+}

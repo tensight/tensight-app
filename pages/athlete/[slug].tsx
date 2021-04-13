@@ -6,7 +6,7 @@ import Nav from '@/components/nav'
 import FavoriteMomentList from '@/components/favoritemomentlist'
 import { FavoriteMomentNoDateWithUser, getAllAthleteSlugs, getAthleteData, getAthleteFavMoments, getEspnLeague } from '@/lib/athletes'
 import { getFlags } from '@/lib/countries'
-import { AthleteMDX, getFileBySlug } from '@/lib/mdx'
+import { FileMDX, getFileBySlug } from '@/lib/mdx'
 import { getSportOfAthlete } from '@/lib/sports'
 import { Athlete, Sport } from '@prisma/client'
 
@@ -14,7 +14,7 @@ type Props = {
   athleteData: Athlete,
   sportOfAthlete: Sport,
   favMoments: FavoriteMomentNoDateWithUser[],
-  athleteProfile?: AthleteMDX
+  athleteProfile?: FileMDX
 }
 
 const AthletePage = ({ athleteData, sportOfAthlete, favMoments, athleteProfile }: Props) => {
@@ -80,7 +80,7 @@ export async function getStaticProps({ params }: Params) {
   const athleteData: Athlete = await getAthleteData(params.slug)
   const sportOfAthlete: Sport = await getSportOfAthlete(params.slug)
   const favMoments: FavoriteMomentNoDateWithUser[] = await getAthleteFavMoments(athleteData.id)
-  const athleteProfile: AthleteMDX | null = await getFileBySlug('athletes', params.slug)
+  const athleteProfile: FileMDX = await getFileBySlug('athletes', params.slug)
 
   return {
     props: {

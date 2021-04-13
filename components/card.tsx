@@ -1,8 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import { getAthleteData, getAthleteHeadshot } from '@/lib/athletes'
+import { getAthleteHeadshot } from '@/lib/athletes'
 import { getFlags } from '@/lib/countries'
-import { countries } from '@/data/countries'
 import { Athlete } from '@prisma/client'
 
 type Props = {
@@ -13,11 +11,15 @@ const Card = ({ athlete }: Props) => {
   return (
     <Link href={`/athlete/${encodeURIComponent(athlete.slug)}`}>
       <a>
-        <article id="card" className="bg-white flex relative space-x-4 flex-col w-64 p-5 min-w-64 rounded-l transition duration-500 ease-in-out transform hover:-translate-y-2 hover:-translate-x-1 hover:shadow-xl hover:rotate-1 motion-reduce:transform-none" >
+        <article id="card" className="flex flex-col relative space-x-4 w-64 p-5 min-w-64 bg-white bg-opacity-10 rounded-xl shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-2 hover:-translate-x-1 hover:shadow-2xl hover:rotate-1 motion-reduce:transform-none"
+          style={{
+            backdropFilter: 'blur(10px)',
+          }}
+        >
         <header id="card-header">
           <div className="mx-auto">
             <img className="w-full h-48 object-contain"
-              src={getAthleteHeadshot(athlete.espnId, athlete.sport)}
+              src={getAthleteHeadshot(athlete.headshotUrl, athlete.espnId, athlete.sport)}
               onError={(e) => {
                 (e.target as HTMLImageElement).onerror = null;
                 (e.target as HTMLImageElement).src = "./athlete.png";

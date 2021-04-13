@@ -8,7 +8,7 @@ type Props = {
 const FavoriteMomentList = ({ favMoments }: Props) => {
   return (
     <div className="m-8">
-      <h2 className="text-2xl">Favorite Moments</h2>
+      <h2 className="mb-4 text-2xl">Favorite Moments</h2>
       <div className="flex flex-row">
         {typeof favMoments !== 'undefined' && favMoments.length > 0 ? (
           favMoments.map((moment) => (
