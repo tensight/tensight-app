@@ -12,7 +12,7 @@ const AthleteHeader = ({athleteData, sportOfAthlete}: Props) => {
     <div className="w-auto lg:w-3/5">
       <div className="text-xl m-8">
         <div className="flex flex-row items-center w-full p-2 border-solid border-4 border-gray-700 border-opacity-50">
-          <div className="m-1 min-w-6">
+          <div className="m-1 min-w-min">
             <img className="h-48 object-contain"
                  src={getAthleteHeadshot(athleteData.headshotUrl, athleteData.espnId, athleteData.sport)}
                  onError={(e) => {
@@ -21,14 +21,13 @@ const AthleteHeader = ({athleteData, sportOfAthlete}: Props) => {
                  }}
             ></img>
           </div>
-          <div id="athleteVitals" className="m-1">
+          <div id="athleteVitals" className="flex flex-col justify-between h-48 m-1 py-2">
             <div className="p-0 m-0">
               <h1 className="font-serif font-semibold text-4xl">{`${athleteData.firstName} ${athleteData.lastName}`}</h1>
             </div>
             <div>
               <h3 className="font-serif text-gray-600">{athleteData.nativeName == null ? '' : `(${athleteData.nativeName})`}</h3>
             </div>
-
             <div>
               <h3 className="font-serif text-gray-600">{athleteData.description == null ? '' : athleteData.description}</h3>
             </div>
