@@ -9,7 +9,6 @@ import { FavoriteMomentNoDateWithUser, getAllAthleteSlugs, getAthleteData, getAt
 import { getFlags } from '@/lib/countries'
 import { FileMDX, getFileBySlug } from '@/lib/mdx'
 import { getSportOfAthlete } from '@/lib/sports'
-import { Dialog } from "@headlessui/react"
 import { Athlete, Sport } from '@prisma/client'
 
 type Props = {
