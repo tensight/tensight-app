@@ -1,4 +1,5 @@
 import FavoriteMoment from '@/components/favoritemoment'
+import FavoriteMomentFrame from '@/components/favoritemomentframe'
 import { FavoriteMomentNoDateWithUser } from '@/lib/athletes'
 
 type Props = { 
@@ -17,10 +18,17 @@ const FavoriteMomentList = ({ favMoments }: Props) => {
               favMoment={moment}
             />
           ))
-        ) : <p>Add your own favorite moment</p>}
+        ) : ''}
+        <FavoriteMomentFrame text={frameText(favMoments)} />
       </div>
     </div>
   )
+}
+
+const frameText = (favMoments) => {
+  return favMoments.length === 0
+    ? 'Be the first to submit a favorite moment!'
+    : 'Share your own favorite moment!'
 }
 
 export default FavoriteMomentList

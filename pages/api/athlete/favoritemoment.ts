@@ -43,6 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           athleteId: true,
           description: true,
           url: true,
+          redirectUrl: true,
           User: {
             select: {
               name: true,

@@ -53,6 +53,7 @@ export type FavoriteMomentNoDateWithUser = {
   athleteId: number,
   description: string,
   url: string,
+  redirectUrl: string,
   User: {
     name: string,
     image: string
@@ -60,13 +61,14 @@ export type FavoriteMomentNoDateWithUser = {
 }
 
 export const getAthleteFavMoments = async (athleteId: number) => {
-  return await prisma.favoriteMoment.findMany({
+  const athletes = await prisma.favoriteMoment.findMany({
     select: {
       id: true,
       userId: true,
       athleteId: true,
       description: true,
       url: true,
+      redirectUrl: true,
       User: {
         select: {
           name: true,
@@ -78,6 +80,7 @@ export const getAthleteFavMoments = async (athleteId: number) => {
       athleteId: athleteId
     },
   })
+  return athletes
 }
 
 /* Athlete Headshot Logic */

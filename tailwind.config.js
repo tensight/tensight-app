@@ -43,5 +43,8 @@ module.exports = {
       translate: ['motion-reduce'],
     }
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms')
+  ],
 }
