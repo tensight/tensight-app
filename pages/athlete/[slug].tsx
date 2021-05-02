@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import useSWR from 'swr'
 import AthleteLayout from '@/layouts/AthleteLayout'
 import AthleteHeader from '@/components/athleteheader'
@@ -8,6 +9,7 @@ import { FavoriteMomentNoDateWithUser, getAllAthleteSlugs, getAthleteData, getAt
 import { getFlags } from '@/lib/countries'
 import { FileMDX, getFileBySlug } from '@/lib/mdx'
 import { getSportOfAthlete } from '@/lib/sports'
+import { Dialog } from "@headlessui/react"
 import { Athlete, Sport } from '@prisma/client'
 
 type Props = {
@@ -19,34 +21,36 @@ type Props = {
 
 const AthletePage = ({ athleteData, sportOfAthlete, favMoments, athleteProfile }: Props) => {
   const { data } = useSWR(`/api/athlete/favoritemoments?id=${athleteData.id}`, { initialData: favMoments })
-
+  
   return (
-    <div className="w-screen h-screen p-5">
-      <Head>
-        <title>{athleteData.firstName} {athleteData.lastName} {getFlags(athleteData.heritage).join('  ')}</title>
-        <meta charSet="UTF-8" />
-        <meta name="description" content="Quickly discover athletes and their heritage" />
-        <meta name="keywords" content={`Asian, Sports, Tensight, ${athleteData.firstName} ${athleteData.lastName}`} />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <style jsx global>{`
-          body {
-            background-color: #e5e5e3;
-          }
-        `}
-      </style>
-      <Nav />
-      <div className="px-8">
-        <AthleteHeader athleteData={athleteData} sportOfAthlete={sportOfAthlete} />
-        { athleteProfile &&
-          <AthleteLayout
-            mdxSource={athleteProfile.mdxSource}
-            frontMatter={athleteProfile.frontMatter}
-          /> }
-        <FavoriteMomentList favMoments={data} />
-        {athleteData && getLinks(athleteData)}
+    <>
+      <div className="w-screen h-screen p-5">
+        <Head>
+          <title>{athleteData.firstName} {athleteData.lastName} {getFlags(athleteData.heritage).join('  ')}</title>
+          <meta charSet="UTF-8" />
+          <meta name="description" content="Quickly discover athletes and their heritage" />
+          <meta name="keywords" content={`Asian, Sports, Tensight, ${athleteData.firstName} ${athleteData.lastName}`} />
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <style jsx global>{`
+            body {
+              background-color: #e5e5e3;
+            }
+          `}
+        </style>
+        <Nav />
+        <div className="px-8">
+          <AthleteHeader athleteData={athleteData} sportOfAthlete={sportOfAthlete} />
+          { athleteProfile &&
+            <AthleteLayout
+              mdxSource={athleteProfile.mdxSource}
+              frontMatter={athleteProfile.frontMatter}
+            /> }
+          <FavoriteMomentList favMoments={data} />
+          {athleteData && getLinks(athleteData)}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
