@@ -52,6 +52,7 @@ model FavoriteMoment {
   athleteId           Int?                  @map("athlete_id")
   description         String?
   url                 String?
+  redirectUrl         String?               @map("redirect_url")
   Athlete             Athlete?              @relation(fields: [athleteId], references: [id])
   User                User?                 @relation(fields: [userId], references: [id])
   UserFavoriteMoments UserFavoriteMoment[]
