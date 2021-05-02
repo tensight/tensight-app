@@ -80,7 +80,6 @@ export const getAthleteFavMoments = async (athleteId: number) => {
       athleteId: athleteId
     },
   })
-  console.log(athletes)
   return athletes
 }
 
